@@ -1,0 +1,10 @@
+colorama==0.3.7
+docutils==0.13.1
+Flask==0.12.1
+Jinja2==2.9.6
+jsonpickle==0.9.4
+python-dateutil==2.6.0
+pytz==2017.2
+requests==2.13.0
+Sphinx==1.5.5
+Werkzeug==0.12.1
