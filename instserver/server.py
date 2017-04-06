@@ -12,7 +12,8 @@ from threading import Thread
 
 from instserver.dummyDevice import dummyDevice
 
-class instServer(flask.Flask, QObject):
+
+class InstServer(flask.Flask, QObject):
     """
     Server class to run tasks over the network. It allows to load devices instantiated and to trigger their methods. 
     The task after triggering happens in a separate thread, meaning the several tasks can be executed concurrently. 
@@ -158,7 +159,7 @@ class instServer(flask.Flask, QObject):
         return json.dumps(d)
 
 if __name__ == '__main__':
-    server = instServer(__name__)
+    server = InstServer(__name__)
     d = dummyDevice()
     server.add_device(d, 'd')
     server.run(debug=True)
