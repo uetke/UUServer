@@ -1,3 +1,19 @@
+"""
+client.py
+=========
+Client class that handles the communication with the server. It is mainly for showing how to implement a general class that works with pickle and json.
+
+The code to run this class is::
+
+   from instserver.client import InstClient
+   # First instantiate the client with the IP address and port of the server
+   c = InstClient('http://127.0.0.1:5000')
+   # Let's print a list of the available devices and methods on the server
+   print(c.listdevices())
+   
+.. sectionauthor:: Aquiles Carattino <aquiles@aquicarattino.com>
+"""
+
 import requests
 import json
 from instserver.messages import messages

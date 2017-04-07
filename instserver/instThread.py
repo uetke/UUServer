@@ -1,3 +1,12 @@
+"""
+instThread.py
+=============
+This class is not used any more but is left as an example of how it can be implemented. I like the signaling strategy of Qt, but it is not trivial to implement it with Flask. 
+Looking around, I've found that Celery can be a good way for async tasks, together with blink. More research on those have to be done, since Flask already comes with some signaling interfaces.
+
+.. sectionauthor:: Aquiles Carattino <aquiles@aquicarattino.com>
+"""
+
 from PyQt4 import QtCore
 
 
