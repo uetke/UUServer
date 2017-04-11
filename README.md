@@ -32,3 +32,14 @@ c = InstClient('http://127.0.0.1:5000')
 # Let's print a list of the available devices and methods on the server
 print(c.listdevices())
 ```
+
+## Building the documentation
+The documentation of the program can be build locally and is available at http://uuserver.readthedocs.io/. 
+
+To build the documentation locally, you need to have sphinx installed. Go to the folder docs and run the following command:
+
+```python
+    sphinx-build -b html source/ build/
+```
+
+This will build all the documentation from the source folder into the build folder. Remember that for it to work, the program needs to import every module, therefore you can't build the documentation if you don't have the dependencies in order.
