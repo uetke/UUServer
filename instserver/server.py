@@ -66,6 +66,7 @@ class InstServer(flask.Flask):
         else:
             self.devices[name] = device
             self.running[name] = False
+            self.devthreads[name] = {}
 
         return self.devices
 
@@ -91,10 +92,10 @@ class InstServer(flask.Flask):
         """
         if request.method == 'POST':
             data = json.loads(request.data)
-            name = data['name']
+            name = str(data['name'])
             if name in self.devices:
                 dev = self.devices[name]
-                method = data['method']
+                method = str(data['method'])
                 m = getattr(dev, method)  # Check if the method exists
                 if callable(m):
                     if name in self.devthreads:
