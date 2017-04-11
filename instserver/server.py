@@ -99,8 +99,9 @@ class InstServer(flask.Flask):
                 m = getattr(dev, method)  # Check if the method exists
                 if callable(m):
                     if name in self.devthreads:
-                        if self.devthreads[name][method].is_alive():
-                            return json.dumps({'Message': 3})
+                        if method in self.devthreads[name]:
+                            if self.devthreads[name][method].is_alive():
+                                return json.dumps({'Message': 3})
                     self.devthreads[name][method] = Thread(target=self.deviceThread, args=(self.devices[name], name, method, data['arguments']))
                     self.running[name] = True
                     self.devthreads[name].start()
