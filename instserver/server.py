@@ -144,6 +144,7 @@ class InstServer(flask.Flask):
     def get_data(self):
         """ Gets the data from a specific method on a device if it is available. After this, the data is not destroyed.
         """
+
         if request.method == 'POST':
             data = json.loads(request.data)
             if 'name' in data:
@@ -152,6 +153,8 @@ class InstServer(flask.Flask):
         elif request.method == 'GET':
             name = request.args.get('name')
             method = request.args.get('method')
+            name = str(name)
+            method = str(method)
 
         if self.devthreads[name].is_alive():
             response = 'Device running'

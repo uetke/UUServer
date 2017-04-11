@@ -32,9 +32,12 @@ class BeagleBone(object):
         :param port: string identifying the port, for example "P9_40"
         :return: value of the signal
         """
+        ADC.setup()
         value = ADC.read(port)
+        return value
 
 if __name__ == '__main__':
     d = BeagleBone()
-    d.blink(5)
-    d.get_analog("P9_40")
+    d.blink(2)
+    value = d.get_analog("P9_40")
+    print(value)
