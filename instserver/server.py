@@ -124,6 +124,7 @@ class InstServer(flask.Flask):
             r = m(args)
         else:
             r = m()
+        print('Done: %s, %s = %s' % (name, method, r))
         self.availableData[name, method] = r
         return True
 
@@ -150,6 +151,7 @@ class InstServer(flask.Flask):
             if 'name' in data:
                 name = data['name']
                 method = data['method']
+
         elif request.method == 'GET':
             name = request.args.get('name')
             method = request.args.get('method')
