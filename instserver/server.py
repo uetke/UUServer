@@ -50,15 +50,15 @@ class InstServer(flask.Flask):
         self.route("/List")(self.list_devices)
 
     def mainpage(self):
-        """
-        Results in a message if one checks that the server is running.
+        """ Results in a message if one checks that the server is running.
+        
         :return: 
         """
         return "The server is up and running"
 
     def add_device(self, device, name):
-        """
-        Registers a new device into the server class
+        """ Registers a new device into the server class
+        
         :param device: device previously initiated.
         :param name: name of the device to be used for identification.
         :return: dictionary of devices
@@ -72,8 +72,8 @@ class InstServer(flask.Flask):
         return self.devices
 
     def main_device(self, name):
-        """
-        Returns the methods of the device. It is mostly for debugging options, since it outputs text readable from a web explorer.
+        """ Returns the methods of the device. It is mostly for debugging options, since it outputs text readable from a web explorer.
+        
         :param name: name of the device
         :return: methods
         """
@@ -86,9 +86,9 @@ class InstServer(flask.Flask):
             return "Device not found, please register it with add_device"
 
     def trigger_device(self):
-        """
-        Triggers a specific method of a device with arguments. The device is identified by its name when registered into the server.
+        """ Triggers a specific method of a device with arguments. The device is identified by its name when registered into the server.
         Makes a connection of the signal of the thread to a function that registers the completion of the task.
+        
         :return: json dump of a message
         """
         if request.method == 'POST':
@@ -112,9 +112,8 @@ class InstServer(flask.Flask):
                 return json.dumps({'Message': 2})
 
     def deviceThread(self, device, name, method, args=None):
-        """
-        Function to be run in a separate thread to trigger a mesaurement or an action on a device. It relies on the threading capabilities of Python, therefore is not running in a different core but on a different interpreter. Heavy load activities on the computer side will affect performance.
-        TODO: The way data is exchanged to the main process is highly non-recommended, since it overwrites a dictionary belonging to the main thread. It can be improved by using signaling.
+        """ Function to be run in a separate thread to trigger a mesaurement or an action on a device. It relies on the threading capabilities of Python, therefore is not running in a different core but on a different interpreter. Heavy load activities on the computer side will affect performance.
+        .. todo:: The way data is exchanged to the main process is highly non-recommended, since it overwrites a dictionary belonging to the main thread. It can be improved by using signaling.
         
         :param device: Device in which to trigger the action
         :param name: name given to the device when registering it
@@ -145,8 +144,7 @@ class InstServer(flask.Flask):
         del self.devthreads[name, method]
 
     def get_data(self):
-        """
-        Gets the data from a specific method on a device if it is available. After this, the data is not destroyed.
+        """ Gets the data from a specific method on a device if it is available. After this, the data is not destroyed.
         """
         if request.method == 'POST':
             data = json.loads(request.data)
@@ -165,8 +163,8 @@ class InstServer(flask.Flask):
         return pickle.dumps(response)
 
     def list_devices(self):
-        """
-        Lists the devices registered
+        """ Lists the devices registered
+        
         :return: json dump of a dictionary
         """
         d = {}
