@@ -1,6 +1,25 @@
 """
-Created on April 2017
-@author: Aquiles Carattino
+server.py
+==========
+
+The server is the core of the package and therefore has to be the first place to look for errors or improvements. The 
+server is built on top of Flask, a lightweight framework that allows to rapidly build and deploy solutions. The server 
+will open a connection on a specified port on a specified listening IP address. Care has to be taken to have the port 
+open on the computer, check the firewall rules if errors happen. 
+ 
+The code to run the server should be similar to::
+ 
+    from instserver.server import InstServer
+    from instserver.dummyDevice import dummyDevice
+    # First instantiate the device
+    dev = dummyDevice()
+    
+    # Now is time for the server:
+    server = InstServer(__name__)
+    server.add_device(dev,'dev')
+    server.run(debug=True)
+
+.. sectionauthor:: Aquiles Carattino <aquiles@aquicarattino.com>
 """
 
 import flask
