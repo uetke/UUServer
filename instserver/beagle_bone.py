@@ -5,6 +5,8 @@
 """
 
 import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.ADC as ADC
+
 from time import sleep
 
 class BeagleBone(object):
@@ -24,6 +26,15 @@ class BeagleBone(object):
 
         return True
 
+    def get_analog(self, port):
+        """ Reads an analog signal from the beagle board
+    
+        :param port: string identifying the port, for example "P9_40"
+        :return: value of the signal
+        """
+        value = ADC.read(port)
+
 if __name__ == '__main__':
     d = BeagleBone()
     d.blink(5)
+    d.get_analog("P9_40")

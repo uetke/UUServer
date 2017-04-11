@@ -72,3 +72,6 @@ if __name__ == '__main__':
     c = InstClient('http://131.211.54.147:5000')
     print(c.listdevices())
     print(c.trigger('d', 'blink', 5))
+    print(c.trigger('d', 'read_analog', "P9_40"))
+    input()
+    print(c.get('d', 'read_analog'))
