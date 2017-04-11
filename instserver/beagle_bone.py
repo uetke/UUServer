@@ -23,3 +23,7 @@ class BeagleBone(object):
             GPIO.output('USR3', GPIO.LOW)
 
         return True
+
+if __name__ == '__main__':
+    d = BeagleBone()
+    d.blink(5)

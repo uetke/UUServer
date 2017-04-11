@@ -28,8 +28,6 @@ import pickle
 from flask import request
 from threading import Thread
 
-from instserver.dummyDevice import dummyDevice
-
 
 class InstServer(flask.Flask):
     """
@@ -80,7 +78,7 @@ class InstServer(flask.Flask):
         if name in self.devices:
             out = "Main page of device %s" % name
             out+=str([method for method in dir(self.devices[name]) if
-             callable(getattr(self.devices[name], method)) and method[0] != '_'])
+                      callable(getattr(self.devices[name], method)) and method[0] != '_'])
             return out
         else:
             return "Device not found, please register it with add_device"
@@ -100,7 +98,7 @@ class InstServer(flask.Flask):
                 m = getattr(dev, method)  # Check if the method exists
                 if callable(m):
                     if name in self.devthreads:
-                         if self.devthreads[name].is_alive():
+                        if self.devthreads[name].is_alive():
                             return json.dumps({'Message': 3})
                     self.devthreads[name] = Thread(target=self.deviceThread, args=(self.devices[name], name, method, data['arguments']))
                     self.running[name] = True
@@ -174,7 +172,23 @@ class InstServer(flask.Flask):
         return json.dumps(d)
 
 if __name__ == '__main__':
+    from beagle_bone import BeageBone
+
     server = InstServer(__name__)
-    d = dummyDevice()
+    d = BeageBone()
     server.add_device(d, 'd')
     server.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,7 +16,7 @@ The code to run this class is::
 
 import requests
 import json
-from instserver.messages import messages
+from messages import messages
 import pickle
 
 
@@ -40,12 +40,13 @@ class InstClient(object):
         :param arguments: arguments to be passed to the method
         :return: Message from the server translated according to the dictionary messages
         """
+
         d = json.dumps({'name': name, 'method': method, 'arguments': arguments})
         r = requests.post(self.addr+"/Trigger", data=d)
-        r = json.loads(r.text)
+        #r = json.loads(r.text)
 
         # Translate to the proper message
-        return messages[r['Message']]
+        #return messages[r['Message']]
 
     def get(self, name, method):
         """ Downloads data from the server
@@ -67,11 +68,6 @@ class InstClient(object):
 
 if __name__ == '__main__':
 
-    c = InstClient('http://127.0.0.1:5000')
-    print(c.listdevices())
-    print(c.trigger('d', 'idn'))
-    input()
-    print(c.trigger('d', 'measure', 2000))
-    print(c.get('d', 'idn'))
-    input()
-    print(c.get('d', 'measure'))
+    c = InstClient('http://192.168.7.2:5000/')
+    #print(c.listdevices())
+    c.trigger('d', 'blink', 5)
