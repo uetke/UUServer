@@ -11,13 +11,14 @@ class InstClient(object):
     def __init__(self, addr):
         """
         Client class for handling the communication with the server. It is not completely necessary, since the communication can be directly addressed with the use of requests.
+        
         :param addr: the http address where the server is running, including the port.
         """
         self.addr = addr
 
     def trigger(self, name, method, arguments=None):
-        """
-        Triggers a remote instrument by passing its name, method and arguments
+        """ Triggers a remote instrument by passing its name, method and arguments
+        
         :param name: name of the device, as registered in the server
         :param method: method to be run on the server
         :param arguments: arguments to be passed to the method
@@ -31,8 +32,8 @@ class InstClient(object):
         return messages[r['Message']]
 
     def get(self, name, method):
-        """
-        Downloads data from the server
+        """ Downloads data from the server
+        
         :param name: Name of the method
         :param method: Method to get data from
         :return: whatever type of data was generated in the server
@@ -41,8 +42,8 @@ class InstClient(object):
         return pickle.loads(r.content)
 
     def listdevices(self):
-        """
-        Lists the devices available in the server with their methods
+        """ Lists the devices available in the server with their methods
+        
         :return: dictionary of devices and available methods
         """
         r = requests.get(self.addr + "/List")
