@@ -172,12 +172,16 @@ class InstServer(flask.Flask):
         return json.dumps(d)
 
 if __name__ == '__main__':
-    from beagle_bone import BeageBone
+    try:
+        from beagle_bone import BeagleBone
+        d = BeagleBone()
+    except:
+        from dummyDevice import DummyDevice
+        d = DummyDevice()
 
     server = InstServer(__name__)
-    d = BeageBone()
     server.add_device(d, 'd')
-    server.run(debug=True)
+    server.run(host='0.0.0.0', debug=True)
 
 
 

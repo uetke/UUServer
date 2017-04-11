@@ -10,7 +10,7 @@ import numpy as np
 from time import sleep
 
 
-class dummyDevice(object):
+class DummyDevice(object):
     """Dummy Device class"""
     def __init__(self):
         self.name = 'Dummy'
@@ -41,7 +41,7 @@ class dummyDevice(object):
         return np.random.random(time)
 
 if __name__ == '__main__':
-    d = dummyDevice()
+    d = DummyDevice()
     print(d)
-    f = getattr(d,'idn')
+    f = getattr(d, 'idn')
     print(f())

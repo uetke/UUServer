@@ -7,7 +7,6 @@
 import Adafruit_BBIO.GPIO as GPIO
 from time import sleep
 
-
 class BeagleBone(object):
     def __init__(self):
         self.name = 'Beagle'
@@ -21,6 +20,7 @@ class BeagleBone(object):
             GPIO.output('USR3', GPIO.HIGH)
             sleep(1)
             GPIO.output('USR3', GPIO.LOW)
+            sleep(1)
 
         return True
 

@@ -30,6 +30,7 @@ class InstClient(object):
         
         :param addr: the http address where the server is running, including the port.
         """
+
         self.addr = addr
 
     def trigger(self, name, method, arguments=None):
@@ -68,6 +69,6 @@ class InstClient(object):
 
 if __name__ == '__main__':
 
-    c = InstClient('http://192.168.7.2:5000/')
-    #print(c.listdevices())
-    c.trigger('d', 'blink', 5)
+    c = InstClient('http://131.211.54.147:5000')
+    print(c.listdevices())
+    print(c.trigger('d', 'blink', 5))
