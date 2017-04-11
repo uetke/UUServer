@@ -25,21 +25,19 @@ The code to run the server should be similar to::
 import flask
 import json
 import pickle
-from PyQt4.QtCore import QObject
 from flask import request
 from threading import Thread
 
 from instserver.dummyDevice import dummyDevice
 
 
-class InstServer(flask.Flask, QObject):
+class InstServer(flask.Flask):
     """
     Server class to run tasks over the network. It allows to load devices instantiated and to trigger their methods. 
     The task after triggering happens in a separate thread, meaning the several tasks can be executed concurrently. 
     """
     def __init__(self, import_name):
         flask.Flask.__init__(self,import_name)
-        QObject.__init__(self)
         self.devices = {}  # Dictionary to store the devices loaded to the server
         self.running = {}  # Dictionary to store if the devices are running
         self.availableData = {}  # Dictionary to store the available data to be downloaded by the user
