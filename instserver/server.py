@@ -104,7 +104,7 @@ class InstServer(flask.Flask):
                                 return json.dumps({'Message': 3})
                     self.devthreads[name][method] = Thread(target=self.deviceThread, args=(self.devices[name], name, method, data['arguments']))
                     self.running[name] = True
-                    self.devthreads[name].start()
+                    self.devthreads[name][method].start()
                     return json.dumps({'Message': 0})
                 else:
                     return json.dumps({'Message': 1})
@@ -151,8 +151,8 @@ class InstServer(flask.Flask):
         if request.method == 'POST':
             data = json.loads(request.data)
             if 'name' in data:
-                name = data['name']
-                method = data['method']
+                name = str(data['name'])
+                method = str(data['method'])
 
         elif request.method == 'GET':
             name = request.args.get('name')
@@ -160,7 +160,7 @@ class InstServer(flask.Flask):
             name = str(name)
             method = str(method)
 
-        if self.devthreads[name].is_alive():
+        if self.devthreads[name][method].is_alive():
             response = 'Device running'
         else:
             response = self.availableData[name, method]
